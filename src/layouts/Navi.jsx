@@ -7,16 +7,16 @@ export default function Navi() {
       <Menu size="large" fixed="top">
         <Container>
           <Menu.Item name="HRMS Project" />
-          <Menu.Item name="home" />
+          <Menu.Item name="Ana Sayfa" icon="home"/>
           <Menu.Item name="jobPostings" />
 
           <Menu.Menu position="right">
-            <Menu.Item name="profile" />
+            <Menu.Item name="Profil" />
             <Menu.Item>
               <Button.Group>
-                <Button>Sign In</Button>
+                <Button>Giriş Yap</Button>
                 <Button.Or />
-                <Button color="blue">Sign Up</Button>
+                <Button color="blue">Üye Ol</Button>
               </Button.Group>
             </Menu.Item>
           </Menu.Menu>

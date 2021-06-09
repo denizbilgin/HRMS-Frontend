@@ -3,17 +3,18 @@ import { Icon, Label, Menu, Table } from "semantic-ui-react";
 import EmployerService from "../services/employerService";
 
 export default function EmployerList() {
+  const [employers, setEmployers] = useState([]);
 
-    const [employers, setEmployers] = useState([]);
-
-    useEffect(() => {
-        let employerService = new EmployerService();
-        employerService.getEmployers().then(result => setEmployers(result.data.data))
-    })
+  useEffect(() => {
+    let employerService = new EmployerService();
+    employerService
+      .getEmployers()
+      .then((result) => setEmployers(result.data.data));
+  });
 
   return (
     <div>
-      <Table className="ui employer-table">
+      <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Email</Table.HeaderCell>
@@ -24,16 +25,16 @@ export default function EmployerList() {
         </Table.Header>
 
         <Table.Body>
-            {
-                employers.map((employer) => (
-                    <Table.Row key={employer.id}>
-                    <Table.Cell>{employer.email}</Table.Cell>
-                    <Table.Cell>{employer.companyName}</Table.Cell>
-                    <Table.Cell>{employer.webAdress}</Table.Cell>
-                    <Table.Cell>{employer.phoneNumber}</Table.Cell>
-                  </Table.Row>
-                ))
-            }
+          {
+          employers.map((employer) => (
+            <Table.Row key={employer.id}>
+              <Table.Cell>{employer.email}</Table.Cell>
+              <Table.Cell>{employer.companyName}</Table.Cell>
+              <Table.Cell>{employer.webAdress}</Table.Cell>
+              <Table.Cell>{employer.phoneNumber}</Table.Cell>
+            </Table.Row>
+          ))
+          }
         </Table.Body>
 
         <Table.Footer>

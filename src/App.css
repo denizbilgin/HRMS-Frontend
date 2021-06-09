@@ -5,3 +5,54 @@
 .ui.main.container{
   margin-top: 6.2em;
 }
+
+.my-card{
+  background-color: white;
+  display: inline-block;
+  width: 28%;
+  height: 200px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 6px;
+  border-top: 4px solid #61dafb;
+  box-shadow: 6px 6px 8px #c0c0c0;
+  position: relative;
+}
+
+.my-card h5{
+  font-size: 23px;
+  position: absolute;
+  top: 17%;
+  left: 30px;
+  text-shadow: 2px 2px 5px #8f908f;
+}
+
+.my-card .my-card-body{
+  position: absolute;
+  top: 40%;
+  left: 21%;
+}
+
+.my-card .my-card-footer{
+  position: absolute;
+  bottom: 17px;
+  right: 5%;
+}
+
+.my-card .my-card-text{
+  color: #808080;
+  font-size: 15px;
+}
+
+.my-card .my-card-icon{
+  color: #8f908f;
+}
+
+.my-card .my-card-job-pos{
+  border-bottom: 1px solid #8f908f;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  color: #474747;
+}
+
+

@@ -3,6 +3,7 @@ import { Grid } from "semantic-ui-react";
 import CandidateList from "../components/CandidateList";
 import EmployerList from "../components/EmployerList";
 import RightProfileBar from "../pages/RightProfileBar";
+import JobPosting from "../pages/JobPosting";
 
 export default function Dashboard() {
   return (
@@ -13,6 +14,8 @@ export default function Dashboard() {
             <CandidateList />
             <br /><br />
             <EmployerList />
+            <br /><br />
+            <JobPosting/>
           </Grid.Column>
           <Grid.Column width={4}>
             <RightProfileBar />
