@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import CandidateList from "../components/CandidateList";
 import EmployerList from "../components/EmployerList";
+import AddJobPosting from "../pages/AddJobPosting";
 import RightProfileBar from "../pages/RightProfileBar";
 import JobPosting from "../pages/JobPosting";
 
@@ -16,6 +17,7 @@ export default function Dashboard() {
             <EmployerList />
             <br /><br />
             <JobPosting/>
+            <AddJobPosting/>
           </Grid.Column>
           <Grid.Column width={4}>
             <RightProfileBar />

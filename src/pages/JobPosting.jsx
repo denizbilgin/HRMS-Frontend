@@ -11,12 +11,13 @@ export default function JobPosting() {
     jobPostingService
       .getActiveJobPostings()
       .then((result) => setJobPostings(result.data.data));
-  });
+      console.log(jobPostings)
+  },[]);
 
   return (
     <div>
       {jobPostings.map((jobPosting) => (
-        <div className="my-card">
+        <div className="my-card" key={jobPosting.id}>
           <div className="my-card-header">
             <h5>{jobPosting.employer.companyName}</h5>
           </div>
@@ -27,7 +28,11 @@ export default function JobPosting() {
               </div>
               {jobPosting.jobPosition.positionName}
             </div>
-            <div className="my-card-text">{jobPosting.jobDescription}</div>
+            <div className="my-card-text">
+              {jobPosting.jobDescription}
+              {jobPosting.jobType.jobTypeName}
+              {jobPosting.workingTime.workingTimeName}
+            </div>
           </div>
           <div className="my-card-footer">
             <Icon name="point" size="large" className="my-card-icon"/>
