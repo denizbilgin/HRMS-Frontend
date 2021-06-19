@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { Icon, Button, Grid } from "semantic-ui-react";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 import JobPostingService from "../services/jobPostingService";
-import { Icon, Button, Divider } from "semantic-ui-react";
-import { Grid } from "semantic-ui-react";
 
-export default function JobPosting() {
+export default function FilteredByCityAndPosition() {
+  let { cityId, positionId } = useParams();
+
   const [jobPostings, setJobPostings] = useState([]);
 
   useEffect(() => {
     let jobPostingService = new JobPostingService();
     jobPostingService
-      .getActiveJobPostings()
+      .getByCityIdAndPositionId(cityId, positionId)
       .then((result) => setJobPostings(result.data.data));
-    console.log(jobPostings);
   }, []);
 
   return (
     <div>
-      <Divider horizontal>AKTİF İŞ İLANLARI</Divider>
-      <div className="job-postings-filter-panel">
-        <Grid columns={2}>
+      <Grid columns={2}>
           {jobPostings.map((jobPosting) => (
-            <Grid.Column style={{paddingTop:"0px"}}  key={jobPosting.id}>
-              <div className="job-posting-card">
+            <Grid.Column style={{paddingTop:"0px"}} key={jobPosting.id}>
+              <div className="job-posting-card" >
                 <div className="job-posting-card-header">
                   {jobPosting.employer.companyName}
                 </div>
@@ -57,7 +58,6 @@ export default function JobPosting() {
             </Grid.Column>
           ))}
         </Grid>
-      </div>
     </div>
   );
 }

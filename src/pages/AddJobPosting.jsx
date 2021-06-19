@@ -49,8 +49,6 @@ export default function AddJobPosting() {
     onSubmit: (values, {resetForm}) => {
       let jobPostingService = new JobPostingService();
 
-
-
       jobPostingService.addJobPosting(values).then((result) => console.log(result.data.data));
       resetForm({})
     }

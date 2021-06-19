@@ -14,7 +14,7 @@ function App() {
       <Container className="main">
         <Dashboard />
       </Container>
-      <Footer />
+      <Footer/>
     </div>
   );
 }
