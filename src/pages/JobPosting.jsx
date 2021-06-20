@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import JobPostingService from "../services/jobPostingService";
 import { Icon, Button, Divider } from "semantic-ui-react";
 import { Grid } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 export default function JobPosting() {
   const [jobPostings, setJobPostings] = useState([]);
@@ -11,7 +12,6 @@ export default function JobPosting() {
     jobPostingService
       .getActiveJobPostings()
       .then((result) => setJobPostings(result.data.data));
-    console.log(jobPostings);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default function JobPosting() {
                   {jobPosting.employer.companyName}
                 </div>
                 <div className="job-posting-card-city">
-                  <Icon name="point" />
+                  <Icon name="map marker alternate" />
                   {jobPosting.city.cityName}
                 </div>
                 <div className="job-posting-card-body">
@@ -41,7 +41,7 @@ export default function JobPosting() {
                   </div>
                 </div>
                 <div className="job-posting-card-detail-button">
-                  <Button primary>
+                  <Button primary as={NavLink} to={`/jobposting/${jobPosting.id}`}>
                     <Icon
                       name="briefcase"
                       className="job-posting-card-detail-button-icon"

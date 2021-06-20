@@ -1,6 +1,6 @@
 import React from "react";
-import { Icon, Button, Grid } from "semantic-ui-react";
-import { useParams } from "react-router-dom";
+import { Icon, Button, Grid, Divider } from "semantic-ui-react";
+import { NavLink, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import JobPostingService from "../services/jobPostingService";
@@ -19,6 +19,21 @@ export default function FilteredByCityAndPosition() {
 
   return (
     <div>
+      <Grid>
+        <Grid.Row>
+          <Grid.Column width={1}>
+            <Button
+            primary
+            content="Geri"
+            as={NavLink}
+            to={"/home"}
+            />
+          </Grid.Column>
+          <Grid.Column width={15}>
+            <Divider horizontal>ARADIĞINIZ KRİTERDEKİ İLANLAR</Divider>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
       <Grid columns={2}>
           {jobPostings.map((jobPosting) => (
             <Grid.Column style={{paddingTop:"0px"}} key={jobPosting.id}>
@@ -27,7 +42,7 @@ export default function FilteredByCityAndPosition() {
                   {jobPosting.employer.companyName}
                 </div>
                 <div className="job-posting-card-city">
-                  <Icon name="point" />
+                  <Icon name="map marker alternate" />
                   {jobPosting.city.cityName}
                 </div>
                 <div className="job-posting-card-body">
@@ -42,7 +57,7 @@ export default function FilteredByCityAndPosition() {
                   </div>
                 </div>
                 <div className="job-posting-card-detail-button">
-                  <Button primary>
+                  <Button as={NavLink} to={`/jobposting/${jobPosting.id}`} primary>
                     <Icon
                       name="briefcase"
                       className="job-posting-card-detail-button-icon"

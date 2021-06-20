@@ -6,10 +6,8 @@ import {
   Button,
   Dropdown,
   Input,
-  TextArea,
   Card,
   Form,
-  Grid,
 } from "semantic-ui-react";
 import EmployerService from "../services/employerService";
 import JobTypeService from "../services/jobTypeService";
@@ -134,6 +132,7 @@ export default function AddJobPosting() {
               <Dropdown
                 clearable
                 item
+                search
                 placeholder="İşveren"
                 selection
                 onChange={(event, data) =>
@@ -148,6 +147,7 @@ export default function AddJobPosting() {
             <Form.Field>
               <Dropdown
                 clearable
+                search
                 item
                 placeholder="İş Pozisyonu"
                 selection
@@ -162,6 +162,7 @@ export default function AddJobPosting() {
             </Form.Field>
             <Form.Field>
               <Dropdown
+                search
                 clearable
                 item
                 placeholder="Şehir"
@@ -188,6 +189,7 @@ export default function AddJobPosting() {
             </Form.Field>
             <Form.Field>
               <Dropdown
+                search
                 clearable
                 item
                 placeholder="İş tipi"
@@ -237,6 +239,7 @@ export default function AddJobPosting() {
             <Form.Field>
               <Dropdown
                 clearable
+                search
                 item
                 placeholder="Working Times"
                 selection

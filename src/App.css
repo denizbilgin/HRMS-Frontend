@@ -20,10 +20,11 @@
 
 .job-posting-card{
   margin-top: 30px;
+  margin-bottom: 10px;
   background-color: white;
   height: 80%;
-  border-radius: 6px;
-  border-top: 4px solid #199AD6;
+  border-radius: 4px;
+  border-top: 3px solid #199AD6;
   box-shadow: 6px 6px 5px #c0c0c0;
   position: relative;
 }
@@ -69,6 +70,63 @@
   padding-right: 12px;
 }
 
+/* JOBPOSTING DETAIL */
+
+.job-posting-detail-card{
+  margin-top: 10px;
+  background-color: white;
+  padding: 30px;
+  position: relative;
+  height: 380px;
+  box-shadow: 4px 4px 6px #c0c0c0;
+  border-radius: 5px;
+  border-left: 3px solid #199AD6;
+}
+
+.job-posting-detail-card-header{
+  font-size: 20px;
+}
+
+.job-posting-detail-card-listingdate{
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  color: #c0c0c0;
+}
+
+.job-posting-detail-card-city{
+  color: #c0c0c0;
+  position: absolute;
+  right: 40px;
+  top: 60px;
+  border: 1px solid #c0c0c0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.job-posting-detail-card-body{
+  margin-top: 30px;
+  position: absolute;
+  text-align: left;
+}
+
+.job-posting-detail-card-salary{
+  margin-top: 15px;
+}
+
+.job-posting-detail-card-employer{
+  position: absolute;
+  right: 40px;
+  bottom: 80px;
+}
+
+.job-posting-detail-card-footer{
+  position: absolute;
+  bottom: 10px;
+  width: 94%;
+}
+
+
 /* HOME */
 
 
@@ -80,7 +138,7 @@
 
 .cv-image{
   position: absolute;
-  top: -80px;
+  top: -180px;
   right: -100px;
 }
 

@@ -42,11 +42,9 @@ export default function Home() {
     let jobPositionService = new JobPositionService();
 
     cityService.getCities().then((result) => setCities(result.data.data));
-    console.log(cities);
     jobPositionService
       .getJobPositions()
       .then((result) => setJobPositions(result.data.data));
-    console.log(jobPositions);
   }, []);
 
   const cityOptions = cities.map((city, index) => ({
@@ -206,18 +204,12 @@ export default function Home() {
               <Grid>
                 <Grid.Row
                   className="cv-row"
-                  style={{
-                    marginBottom: "0px",
-                    paddingBottom: "0px",
-                    height: "500px",
-                  }}
                 >
-                  <Grid.Column width={6} style={{ height: "500px" }}>
+                  <Grid.Column width={6}>
                     <div>
                       <h1
                         style={{
                           color: "#199AD6",
-                          marginTop: "2em",
                           fontSize: "42px",
                         }}
                       >

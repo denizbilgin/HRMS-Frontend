@@ -22,6 +22,10 @@ export default class JobPostingService{
         return axios.get(`http://localhost:8080/api/jobpostings/getActiveByCityIdAndPositionId?cityId=${cityId}&positionId=${positionId}`)
     }
 
+    getById(jobPostingId){
+        return axios.get("http://localhost:8080/api/jobpostings/getbyid?jobPostingId=" + jobPostingId)
+    }
+
     addJobPosting(values){
       values.employer = {id:values.employerId}
       values.jobPosition = {positionId:values.jobPositionId}

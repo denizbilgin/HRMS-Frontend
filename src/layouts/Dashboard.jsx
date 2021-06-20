@@ -7,6 +7,7 @@ import JobPosting from "../pages/JobPosting";
 import { Route } from "react-router-dom";
 import Home from "../pages/Home"
 import FilteredByCityAndPosition from "../pages/FilteredByCityAndPosition";
+import JobPostingDetail from "../pages/JobPostingDetail";
 
 export default function Dashboard() {
   return (
@@ -21,6 +22,7 @@ export default function Dashboard() {
             <Route exact path="/jobpostings" component={JobPosting}/>
             <Route exact path="/addjobposting" component={AddJobPosting}/>
             <Route exact path="/jobpostings/cityId/:cityId/positionId/:positionId" component={FilteredByCityAndPosition}/>
+            <Route exact path="/jobposting/:id" component={JobPostingDetail}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "../src";
 import Navi from "./layouts/Navi";

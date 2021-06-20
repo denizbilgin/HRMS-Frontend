@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
 import { Grid } from "semantic-ui-react";
 import RightProfileBar from "../pages/RightProfileBar";
