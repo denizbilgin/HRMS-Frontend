@@ -1,7 +1,8 @@
 /* GENERAL CSS */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 *{
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Poppins', sans-serif; 
+  box-sizing: border-box;
 }
 
 .App {
@@ -16,71 +17,70 @@
   font-size: 30px;
 }
 
+
 /* JOB POSTİNG COMPONENT */
 
 .job-posting-card{
-  margin-top: 30px;
-  margin-bottom: 10px;
   background-color: white;
-  height: 80%;
-  border-radius: 4px;
-  border-top: 3px solid #199AD6;
-  box-shadow: 6px 6px 5px #c0c0c0;
+  padding: 30px;
   position: relative;
+  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  padding-bottom: 20px;
+  box-shadow: 3px 3px 22px #c0c0c07a
+}
+
+.job-posting-card-img{
+  margin: 0 auto;
+  padding-right: 0;
+  width: 150px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+}
+
+.job-posting-card-star{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #808080;
+  font-size: 20px;
 }
 
 .job-posting-card-city{
-  color: #c0c0c0;
-  border: 1px solid #c0c0c0;
-  padding: 5px;
-  margin: 10px 10px;
-  border-radius: 5px;
   position: absolute;
-  right: 0;
-  top: 0;
+  top: 10px;
+  left: 15px;
+  color: #808080;
 }
 
 .job-posting-card-header{
-  font-size: 25px;
-  margin-top: 16px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #646464;
+}
+
+.job-posting-card-position{
+  margin-bottom: 10px;
+}
+
+.job-posting-card-job-description{
+  margin-bottom: 10px;
 }
 
 .job-posting-card-body{
-  margin-top: 30px;
-  padding-bottom: 50px;
-  text-align: left;
-  margin-left: 30px;
-}
-
-.job-posting-card-salary{
-  position: absolute;
-  left: 30px;
-  bottom: 10px;
-  color: #c0c0c0;
-}
-
-.job-posting-card-detail-button{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-}
-
-.angle-right{
-  padding-left: 27px;
-  padding-right: 12px;
+  padding: 10px;
 }
 
 /* JOBPOSTING DETAIL */
 
 .job-posting-detail-card{
   margin-top: 10px;
-  background-color: white;
   padding: 30px;
   position: relative;
   height: 380px;
-  box-shadow: 4px 4px 6px #c0c0c0;
   border-radius: 5px;
-  border-left: 3px solid #199AD6;
 }
 
 .job-posting-detail-card-header{
@@ -90,14 +90,14 @@
 .job-posting-detail-card-listingdate{
   position: absolute;
   top: 10px;
-  left: 15px;
+  left: 30px;
   color: #c0c0c0;
 }
 
 .job-posting-detail-card-city{
   color: #c0c0c0;
   position: absolute;
-  right: 40px;
+  right: 45px;
   top: 60px;
   border: 1px solid #c0c0c0;
   padding: 10px;
@@ -122,14 +122,12 @@
 
 .job-posting-detail-card-footer{
   position: absolute;
-  bottom: 10px;
+  bottom: -10px;
   width: 94%;
 }
 
 
 /* HOME */
-
-
 
 .cv-row{
   position: relative;
@@ -150,15 +148,12 @@
 .footer{
   background-color: white;
   height: 200px;
+  margin-top: 40px;
 }
 
 /* NAVBAR */
 
 .nav-logo{
-  transition: font-size 2s;
-}
-
-.nav-logo:hover{
   font-size: 22px;
 }
 
@@ -169,4 +164,16 @@
   padding: 10px;
   border-radius: 8px;
   box-shadow: 2px 2px 4px #c0c0c0;
+}
+
+.my-input{
+  margin-top: 10px;
+  padding: 10px ;
+  width: 100%;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  font-size: 14px;
+  border: none;
+  box-shadow: 2px 2px 10px #dbdbdbcc ;
+  
 }

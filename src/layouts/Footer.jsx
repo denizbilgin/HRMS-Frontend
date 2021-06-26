@@ -9,7 +9,7 @@ export default function Footer() {
         <Grid.Row>
           <Grid.Column>
             <h5>Sayfalar</h5>
-            <Divider style={{width:"200px", marginLeft:"115px"}}/>
+            <Divider style={{width:"200px", marginLeft:"135px"}}/>
             <div>
               <List>
                 <List.Item>
@@ -37,7 +37,7 @@ export default function Footer() {
           </Grid.Column>
           <Grid.Column>
             <h5>Bize Ulaşın</h5>
-            <Divider style={{width:"200px", marginLeft:"115px"}}/>
+            <Divider style={{width:"200px", marginLeft:"135px"}}/>
             <div>
               <List>
                 <List.Item>
@@ -61,7 +61,7 @@ export default function Footer() {
           </Grid.Column>
           <Grid.Column>
             <h5>Emeği Geçenler</h5>
-            <Divider style={{width:"200px", marginLeft:"115px"}}/>
+            <Divider style={{width:"200px", marginLeft:"135px"}}/>
             <div>
               Deniz Bilgin
               <br />

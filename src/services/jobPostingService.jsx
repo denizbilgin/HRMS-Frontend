@@ -26,6 +26,22 @@ export default class JobPostingService{
         return axios.get("http://localhost:8080/api/jobpostings/getbyid?jobPostingId=" + jobPostingId)
     }
 
+    getByPage(pageNo,pageSize){
+        return axios.get(`http://localhost:8080/api/jobpostings/getallbypage?pageNo=${pageNo}&pageSize=${pageSize}`)
+    }
+
+    getByCityIdAndWorkingTimeId(cityId,workingTimeId){
+        return axios.get(`http://localhost:8080/api/jobpostings/getbycityidandworkingtimeid?cityId=${cityId}&workingTimeId=${workingTimeId}`)
+    }
+
+    getByCityId(cityId){
+        return axios.get(`http://localhost:8080/api/jobpostings/getbycityid?cityId=${cityId}`)
+    }
+
+    getByWorkingTimeId(workingTimeId){
+        return axios.get(`http://localhost:8080/api/jobpostings/getbyworkingtimeid?workingTimeId=${workingTimeId}`)
+    }
+
     addJobPosting(values){
       values.employer = {id:values.employerId}
       values.jobPosition = {positionId:values.jobPositionId}

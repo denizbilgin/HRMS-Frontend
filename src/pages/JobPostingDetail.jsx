@@ -30,13 +30,13 @@ export default function JobPostingDetail() {
             />
           </Grid.Column>
           <Grid.Column width={15}>
-            <Divider horizontal>İLAN DETAYI</Divider>
+            <Divider style={{marginLeft:"10px"}}></Divider>
           </Grid.Column>
         </Grid.Row>
       </Grid>
 
       <div className="job-posting-detail-card">
-        <div className="job-posting-detail-card-header">
+        <div className="job-posting-detail-card-header" style={{fontSize:"30px"}}>
           <b>{jobPosting.employer?.companyName}</b>
         </div>
         <div className="job-posting-detail-card-city">
@@ -44,6 +44,7 @@ export default function JobPostingDetail() {
           {jobPosting.city?.cityName}
         </div>
         <div className="job-posting-detail-card-listingdate">
+          <Icon name="clock"/>
           {jobPosting.listingDate}
         </div>
         <div className="job-posting-detail-card-body">
@@ -54,6 +55,7 @@ export default function JobPostingDetail() {
             <Icon name="caret right" style={{ marginLeft: "2px" }} />
             {jobPosting.jobPosition?.positionName}
           </div>
+          <br />
           <div>
             <span>
               <b>İş Detayı</b>
@@ -134,6 +136,7 @@ export default function JobPostingDetail() {
             <Icon name="caret right" /> {jobPosting.minSalary}{" "}
             <Icon name="minus" /> {jobPosting.maxSalary}
           </div>
+          <br />
           <div style={{ marginTop: "10px" }}>
             <span>
               <b>İlanın Son Erişim Tarihi</b>

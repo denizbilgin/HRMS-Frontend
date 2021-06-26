@@ -1,63 +1,115 @@
 import React, { useEffect, useState } from "react";
 import JobPostingService from "../services/jobPostingService";
-import { Icon, Button, Divider } from "semantic-ui-react";
+import { Icon, Button, Divider, Image } from "semantic-ui-react";
 import { Grid } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import JobPostingFilter from "../components/JobPostingFilter";
+import JobPostingFavouriteService from "../services/jobPostingFavouriteService";
 
 export default function JobPosting() {
   const [jobPostings, setJobPostings] = useState([]);
+  const [candidateFavourites, setCandidateFavourites] = useState([])
+  
 
   useEffect(() => {
+    let jobPostingFavouriteService = new JobPostingFavouriteService();
     let jobPostingService = new JobPostingService();
-    jobPostingService
-      .getActiveJobPostings()
-      .then((result) => setJobPostings(result.data.data));
+    jobPostingService.getActiveJobPostings().then((result) => setJobPostings(result.data.data));
+    jobPostingFavouriteService.getCandidateFavourites(5).then((result) => setCandidateFavourites(result.data.data));
   }, []);
+
+  function getRandomColor() {
+    var letters = "0123456789ABCDEF";
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function handleRandomColor() {
+    return "3px solid" + getRandomColor();
+  }
+
+  function handleChangeFavourite(candidateId,jobPostingId) {
+    let jobPostingFavouriteService = new JobPostingFavouriteService();
+    jobPostingFavouriteService.changeFavourite(candidateId,jobPostingId)
+  }
+ 
+  
+  function handleFavouriteIcon(jobPostingId) { 
+    var bool = false;
+    for (let i = 0; i < candidateFavourites.length; i++) {
+      if (candidateFavourites[i].jobPostingId === jobPostingId) {
+        return true;
+      } else {
+        bool = false;
+      }
+    }
+    return bool;
+  }
 
   return (
     <div>
-      <Divider horizontal>AKTİF İŞ İLANLARI</Divider>
-      <div className="job-postings-filter-panel">
-        <Grid columns={2}>
+      <Divider horizontal style={{ marginBottom: "10px" }}>
+        <div style={{paddingTop:"10px",lineHeight:"0px",fontSize:"20px"}}>AKTİF İŞ İLANLARI</div>
+      </Divider>
+      <div className="job-posting-filter-panel">
+        <JobPostingFilter></JobPostingFilter>
+      </div>
+        <Grid columns={3} style={{marginTop:"30px"}}>
           {jobPostings.map((jobPosting) => (
-            <Grid.Column style={{paddingTop:"0px"}}  key={jobPosting.id}>
-              <div className="job-posting-card">
-                <div className="job-posting-card-header">
-                  {jobPosting.employer.companyName}
+            <Grid.Column style={{ paddingTop: "0px" }} key={jobPosting.id}>
+              <div
+                className="job-posting-card"
+                style={{ borderTop: handleRandomColor() }}
+              >
+                <div className="job-posting-card-img">
+                  <Image
+                    src={jobPosting.employer.imgUrl}
+                    size="small"
+                  />
                 </div>
-                <div className="job-posting-card-city">
-                  <Icon name="map marker alternate" />
-                  {jobPosting.city.cityName}
-                </div>
-                <div className="job-posting-card-body">
-                  <div>
-                    <span>Aranan Pozisyon</span> <Icon name="angle right" />{" "}
-                    {jobPosting.jobPosition.positionName}
+                <div>
+                  <div className="job-posting-card-header">
+                    <b>{jobPosting.employer.companyName}</b>
                   </div>
-                  <div>
-                    <span>İş Açıklaması</span>{" "}
-                    <Icon className="angle-right" name="angle right" />{" "}
-                    {jobPosting.jobDescription}
+                  <div className="job-posting-card-star" onClick = {() => handleChangeFavourite(5,jobPosting.id)}>
+                    {handleFavouriteIcon(jobPosting.id)=== true? <Icon name="bookmark"/> : <Icon name="bookmark outline"/>}
+                  </div>
+                  <div className="job-posting-card-body">
+                    <div className="job-posting-card-city">
+                      <Icon name="map marker alternate" />
+                      {jobPosting.city.cityName}
+                    </div>
+                    <div className="job-posting-card-position">
+                      <span style={{color:"#c0c0c0"}}>Pozisyon </span>
+                      {jobPosting.jobPosition.positionName}
+                    </div>
+                    <Divider style={{marginBottom:"2px",marginTop:"1px"}}/>
+                    <div className="job-posting-card-job-description">
+                      <span  style={{color:"#c0c0c0"}}>İş Açıklaması </span>
+                      <br />
+                      {jobPosting.jobDescription}
+                    </div>
                   </div>
                 </div>
                 <div className="job-posting-card-detail-button">
-                  <Button primary as={NavLink} to={`/jobposting/${jobPosting.id}`}>
+                  <Button
+                    primary
+                    as={NavLink}
+                    to={`/jobposting/${jobPosting.id}`}
+                  >
                     <Icon
                       name="briefcase"
                       className="job-posting-card-detail-button-icon"
-                    />
-                    Detaylarına Git
+                    /> <span>Detaylarına Git</span>
                   </Button>
-                </div>
-                <div className="job-posting-card-salary">
-                  <span>Maaş Skalası : </span> {jobPosting.minSalary} -{" "}
-                  {jobPosting.maxSalary} <Icon name="lira sign" />
                 </div>
               </div>
             </Grid.Column>
           ))}
         </Grid>
-      </div>
     </div>
   );
 }
