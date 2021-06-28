@@ -1,6 +1,6 @@
 import { useField } from 'formik'
 import React from 'react'
-import { FormField, Dropdown, Label } from 'semantic-ui-react';
+import { FormField, Label } from 'semantic-ui-react';
 
 export default function DevHrmsDropdownInput({...props}) {
 

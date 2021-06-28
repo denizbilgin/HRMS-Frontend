@@ -17,6 +17,10 @@
   font-size: 30px;
 }
 
+ul{
+  list-style: none;
+}
+
 
 /* JOB POSTİNG COMPONENT */
 
@@ -155,6 +159,49 @@
 
 .nav-logo{
   font-size: 22px;
+}
+
+/* CANDIDATE PROFILE */
+
+.cv-container{
+  border-radius: 15px;
+  box-shadow: 22px 11px 22px rgb(230, 230, 230);
+}
+
+.cv-left-bar-header{
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 6px;
+}
+
+.cv-profile-img{
+  border-radius: 50px;
+  margin:auto;
+  object-fit: cover;
+  border: 2px solid white;
+}
+.cv-left{
+  background-color: #537fb4;
+  padding: 15px;
+  color: white;
+  border-radius: 15px 0 0 15px;
+  margin: auto;
+  height: 100%;
+}
+
+.cv-right{
+  text-align: left;
+  border-radius: 0 15px 15px 0;
+}
+
+.cv-right-header{
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+.cv-right-grey-text{
+  color: #a5a5a5;
+  margin-right: 10px;
 }
 
 /* MY'S */

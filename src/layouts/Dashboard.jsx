@@ -6,8 +6,8 @@ import AddJobPosting from "../pages/AddJobPosting";
 import JobPosting from "../pages/JobPosting";
 import { Route } from "react-router-dom";
 import Home from "../pages/Home"
-import FilteredJobPostings from "../pages/FilteredJobPostings";
 import JobPostingDetail from "../pages/JobPostingDetail";
+import CandidateProfile from "../pages/CandidateProfile";
 
 export default function Dashboard() {
   return (
@@ -21,12 +21,13 @@ export default function Dashboard() {
             <Route path="/employerlist" component={EmployerList}/>
             <Route exact path="/jobpostings" component={JobPosting}/>
             <Route exact path="/addjobposting" component={AddJobPosting}/>
-            <Route exact path="/jobpostings/cityId/:cityId/positionId/:positionId" component={FilteredJobPostings}/>
-            <Route exact path="/jobpostings/cityId/:cityId/workingTimeId/:workingTimeId" component={FilteredJobPostings}/>
-            <Route exact path="/jobpostings/cityId/:cityId" component={FilteredJobPostings}/>
-            <Route exact path="/jobpostings/workingTimeId/:workingTimeId" component={FilteredJobPostings}/>
-            <Route exact path="/jobpostings/getallbypage/pageNo/:pageNo/pageSize/:pageSize" component={FilteredJobPostings}/>
+            <Route exact path="/jobpostings/cityId/:cityId/positionId/:positionId" component={JobPosting}/>
+            <Route exact path="/jobpostings/cityId/:cityId/workingTimeId/:workingTimeId" component={JobPosting}/>
+            <Route exact path="/jobpostings/cityId/:cityId" component={JobPosting}/>
+            <Route exact path="/jobpostings/workingTimeId/:workingTimeId" component={JobPosting}/>
+            <Route exact path="/jobpostings/getallbypage/pageNo/:pageNo/pageSize/:pageSize" component={JobPosting}/>
             <Route exact path="/jobposting/:id" component={JobPostingDetail}/>
+            <Route exact path="/candidateProfile/candidateId/:id" component={CandidateProfile}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

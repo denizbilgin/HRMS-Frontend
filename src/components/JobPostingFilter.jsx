@@ -6,7 +6,6 @@ import WorkingTimeService from "../services/workingTimeService";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Grid, Button } from "semantic-ui-react";
-import JobPostingService from "../services/jobPostingService";
 import { useHistory } from "react-router";
 
 export default function JobPostingFilter() {
@@ -76,6 +75,7 @@ export default function JobPostingFilter() {
     } else if (values.workingTimeId) {
       history.push(`/jobpostings/workingTimeId/${values.workingTimeId}`);
     }
+    window.location.reload(false);
   }
 
   function handlePagination(values) {

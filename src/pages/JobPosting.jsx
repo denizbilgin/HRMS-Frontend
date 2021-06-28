@@ -1,21 +1,45 @@
 import React, { useEffect, useState } from "react";
 import JobPostingService from "../services/jobPostingService";
 import { Icon, Button, Divider, Image } from "semantic-ui-react";
-import { Grid } from "semantic-ui-react";
+import { Grid, Pagination } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import JobPostingFilter from "../components/JobPostingFilter";
 import JobPostingFavouriteService from "../services/jobPostingFavouriteService";
+import { useParams } from "react-router";
+import { useHistory } from "react-router";
 
 export default function JobPosting() {
   const [jobPostings, setJobPostings] = useState([]);
-  const [candidateFavourites, setCandidateFavourites] = useState([])
+  const [candidateFavourites, setCandidateFavourites] = useState([]);
+  const [jobPostingsCount, setJobPostingsCount] = useState([])
+
+  let { cityId, positionId, workingTimeId,pageNo,pageSize } = useParams();
+
+  const history = useHistory();
   
 
   useEffect(() => {
     let jobPostingFavouriteService = new JobPostingFavouriteService();
     let jobPostingService = new JobPostingService();
-    jobPostingService.getActiveJobPostings().then((result) => setJobPostings(result.data.data));
+
+
+    if (cityId && positionId) {
+      jobPostingService
+      .getByCityIdAndPositionId(cityId, positionId)
+      .then((result) => setJobPostings(result.data.data));
+    } else if(cityId && workingTimeId){
+      jobPostingService.getByCityIdAndWorkingTimeId(cityId,workingTimeId).then((result) => setJobPostings(result.data.data));
+    } else if(cityId){
+      jobPostingService.getByCityId(cityId).then((result) => setJobPostings(result.data.data));
+    } else if(workingTimeId){
+      jobPostingService.getByWorkingTimeId(workingTimeId).then((result) => setJobPostings(result.data.data));
+    } else if(pageNo,pageSize){
+      jobPostingService.getByPage(pageNo,pageSize).then((result) => setJobPostings(result.data.data));
+    }else{
+      jobPostingService.getActiveJobPostings().then((result) => setJobPostings(result.data.data));
+    }
     jobPostingFavouriteService.getCandidateFavourites(5).then((result) => setCandidateFavourites(result.data.data));
+    jobPostingService.getActiveJobPostings().then((result) => setJobPostingsCount(result.data.data));
   }, []);
 
   function getRandomColor() {
@@ -34,6 +58,7 @@ export default function JobPosting() {
   function handleChangeFavourite(candidateId,jobPostingId) {
     let jobPostingFavouriteService = new JobPostingFavouriteService();
     jobPostingFavouriteService.changeFavourite(candidateId,jobPostingId)
+    window.location.reload(false);
   }
  
   
@@ -47,6 +72,13 @@ export default function JobPosting() {
       }
     }
     return bool;
+  }
+
+  function handlePagination(pageNo) {
+    history.push(
+      `/jobpostings/getallbypage/pageNo/${pageNo}/pageSize/${pageSize}`
+    );
+    window.location.reload(false);
   }
 
   return (
@@ -110,6 +142,7 @@ export default function JobPosting() {
             </Grid.Column>
           ))}
         </Grid>
+        <Pagination id="pag" defaultActivePage={pageNo} pointing secondary totalPages={jobPostingsCount.length/pageSize} onPageChange={(event, data) => handlePagination(data.activePage)}/>
     </div>
   );
 }
