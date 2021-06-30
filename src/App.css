@@ -50,6 +50,7 @@ ul{
   right: 15px;
   color: #808080;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .job-posting-card-city{
@@ -150,8 +151,6 @@ ul{
 /* FOOTER */
 
 .footer{
-  background-color: white;
-  height: 200px;
   margin-top: 40px;
 }
 

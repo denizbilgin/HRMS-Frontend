@@ -24,6 +24,33 @@ export default function SchoolUpdateModal(props) {
     toast.success("Okul Bilgileriniz Güncellendi.");
   }
 
+  function handleAddSchool(values) {
+    let schoolService = new SchoolService();
+    schoolService.add(values);
+    toast.success("Özgeçmişinize Yeni Bir Okul Eklendi.");
+  }
+
+  function handleDeleteSchool(schoolId) {
+    let schoolService = new SchoolService();
+    schoolService.delete(schoolId);
+    toast.success("Okul Silindi.");
+  }
+
+  const schoolAddInitialValues = {
+    candidateId: props.candidateId,
+    department: "",
+    entryDate: "",
+    graduateDate: "",
+    schoolName: "",
+  };
+
+  const schoolAddSchema = Yup.object({
+    schoolName: Yup.string().required("Okul Bilgisi Zorunludur"),
+    department: Yup.string().required("Departman Bilgisi Zorunludur"),
+    entryDate: Yup.date().required("Giriş Tarihi Zorunludur"),
+    graduateDate: Yup.date(),
+  });
+
   return (
     <div>
       <Modal
@@ -33,44 +60,116 @@ export default function SchoolUpdateModal(props) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button fluid style={{ marginTop: "15px", backgroundColor:"white"}}>
+          <Button fluid style={{ marginTop: "15px", backgroundColor: "white" }}>
             Okullarınızı Düzenlemek İçin Tıklayın
           </Button>
         }
       >
-        <Modal.Header>Bilgilerinizi Güncelleyin</Modal.Header>
+        <Modal.Header>Bilgilerinizi Düzenleyin</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             {props.candidateSchools?.map((school) => (
+              <div key={school.id}>
+                <Formik
+                  initialValues={{
+                    id: school.id,
+                    schoolName: school.schoolName,
+                    department: school.department,
+                    entryDate: school.entryDate,
+                    graduateDate: school.graduateDate,
+                  }}
+                  validationSchema={schema}
+                  onSubmit={(values) => {
+                    handleUpdateSchool(values);
+                  }}
+                >
+                  <Form>
+                    <Divider
+                      horizontal
+                      style={{ marginBottom: "20px", marginTop: "10px" }}
+                    >
+                      <div
+                        style={{
+                          paddingTop: "10px",
+                          lineHeight: "0px",
+                          fontSize: "20px",
+                        }}
+                      >
+                        {school.schoolName}
+                      </div>
+                    </Divider>
+                    <div className="my-header">Okul</div>
+                    <DevHrmsTextInput
+                      name="schoolName"
+                      type="text"
+                      className="my-input"
+                    />
+                    <div className="my-header">Departman</div>
+                    <DevHrmsTextInput
+                      name="department"
+                      type="text"
+                      className="my-input"
+                    />
+                    <div className="my-header">Giriş Tarihi</div>
+                    <DevHrmsTextInput
+                      name="entryDate"
+                      type="date"
+                      className="my-input"
+                    />
+                    <div className="my-header">Mezuniyet Tarihi</div>
+                    <DevHrmsTextInput
+                      name="graduateDate"
+                      type="date"
+                      className="my-input"
+                    />
+                    <Button
+                      content="Güncelle"
+                      labelPosition="right"
+                      icon="sync"
+                      primary
+                      fluid
+                      type="submit"
+                      style={{ marginTop: "10px", marginBottom: "10px" }}
+                    />
+                  </Form>
+                </Formik>
+                <Button
+                  content="Sil"
+                  labelPosition="right"
+                  icon="delete"
+                  color="red"
+                  fluid
+                  onClick={() => {
+                    handleDeleteSchool(school.id)
+                  }}
+                  style={{ marginBottom: "40px" }}
+                />
+              </div>
+            ))}
+            <div>
+              <Divider
+                horizontal
+                style={{ marginBottom: "20px", marginTop: "10px" }}
+              >
+                <div
+                  style={{
+                    paddingTop: "10px",
+                    lineHeight: "0px",
+                    fontSize: "20px",
+                  }}
+                >
+                  Okul Ekle
+                </div>
+              </Divider>
               <Formik
-                initialValues={{
-                  id: school.id,
-                  schoolName: school.schoolName,
-                  department: school.department,
-                  entryDate: school.entryDate,
-                  graduateDate: school.graduateDate,
-                }}
-                validationSchema={schema}
+                initialValues={schoolAddInitialValues}
+                validationSchema={schoolAddSchema}
                 onSubmit={(values) => {
-                  handleUpdateSchool(values);
+                  handleAddSchool(values);
                 }}
               >
                 <Form>
-                  <Divider
-                    horizontal
-                    style={{ marginBottom: "20px", marginTop: "10px" }}
-                  >
-                    <div
-                      style={{
-                        paddingTop: "10px",
-                        lineHeight: "0px",
-                        fontSize: "20px",
-                      }}
-                    >
-                      {school.schoolName}
-                    </div>
-                  </Divider>
-                  <div className="my-header">Okul</div>
+                  <div className="my-header">Okul Adı</div>
                   <DevHrmsTextInput
                     name="schoolName"
                     type="text"
@@ -95,17 +194,17 @@ export default function SchoolUpdateModal(props) {
                     className="my-input"
                   />
                   <Button
-                    content="Güncelle"
+                    content="Ekle"
                     labelPosition="right"
-                    icon="sync"
-                    primary
+                    icon="add"
+                    positive
                     fluid
                     type="submit"
                     style={{ marginTop: "10px", marginBottom: "40px" }}
                   />
                 </Form>
               </Formik>
-            ))}
+            </div>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>

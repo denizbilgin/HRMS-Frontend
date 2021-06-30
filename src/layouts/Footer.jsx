@@ -1,75 +1,23 @@
 import React from "react";
-import { Grid, List, Icon, Divider } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { List, Container, Icon } from "semantic-ui-react";
 
 export default function Footer() {
   return (
     <div className="footer">
-      <Grid columns={3}>
-        <Grid.Row>
-          <Grid.Column>
-            <h5>Sayfalar</h5>
-            <Divider style={{width:"200px", marginLeft:"135px"}}/>
-            <div>
-              <List>
-                <List.Item>
-                  <Link to="/">
-                    <List.Icon name="home" />
-                    Ana Sayfa
-                  </Link>
-                </List.Item>
-                <List.Item>
-                  <Link to="/jobpostings">
-                    <List.Icon name="suitcase" />
-                    İş İlanları
-                  </Link>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name="user" />
-                  Üye Ol
-                </List.Item>
-                <List.Item>
-                  <List.Icon name="id card" />
-                  Giriş Yap
-                </List.Item>
-              </List>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <h5>Bize Ulaşın</h5>
-            <Divider style={{width:"200px", marginLeft:"135px"}}/>
-            <div>
-              <List>
-                <List.Item>
-                  <Icon name="hand point right" />
-                  Deniz Bilgin
-                </List.Item>
-                <List.Item>
-                  <Icon name="mail" />
-                  denizbilgin156@gmail.com
-                </List.Item>
-                <List.Item>
-                  <Icon name="instagram" />
-                  denizb04
-                </List.Item>
-                <List.Item href="https://www.linkedin.com/in/deniz-bilgin-763177207/">
-                  <Icon name="linkedin" />
-                  LinkedIn Hesabım
-                </List.Item>
-              </List>
-            </div>
-          </Grid.Column>
-          <Grid.Column>
-            <h5>Emeği Geçenler</h5>
-            <Divider style={{width:"200px", marginLeft:"135px"}}/>
-            <div>
-              Deniz Bilgin
-              <br />
-              Salih Bora Öztürk
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div style={{ backgroundColor: "#e3e3e3", padding:"10px" }}>
+        <Container>
+          <List horizontal>
+            <List.Item><Icon name="facebook" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item><Icon name="twitter" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item><Icon name="instagram" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item><Icon name="linkedin" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item><Icon name="github" size="big" style={{color:"grey"}}/></List.Item>
+          </List>
+        </Container>
+      </div>
+      <div style={{ backgroundColor: "#d9d9d9", padding: "10px", color:"grey" }}>
+        Made By Deniz Bilgin - 2021
+      </div>
     </div>
   );
 }

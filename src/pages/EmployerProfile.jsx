@@ -8,8 +8,7 @@ import {
   Image,
   Modal,
   Header,
-  Icon,
-  FormField
+  Icon
 } from "semantic-ui-react";
 import EmployerService from "../services/employerService";
 import { Formik, Form } from "formik";
@@ -101,7 +100,7 @@ export default function EmployerProfile() {
                 <span><Icon name="question" style={{marginRight:"10px"}}/></span>
                 <span>Hesabınız Onaylı Mı?</span>
                 <Icon name="triangle right"/>
-                {employer.activated == false ? <Icon name="delete"/> : <Icon name="checkmark"/> }
+                {employer.activated === false ? <Icon name="delete"/> : <Icon name="checkmark"/> }
             </div>
         </div>
         </div>

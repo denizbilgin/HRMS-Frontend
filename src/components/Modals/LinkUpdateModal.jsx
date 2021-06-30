@@ -1,45 +1,58 @@
 import React from "react";
 import { Modal, Button, Divider } from "semantic-ui-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DevHrmsTextInput from "../../utilities/customFormControls/DevHrmsTextInput";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import SkillService from "../../services/skillService";
+import DevHrmsDropdownInput from "../../utilities/customFormControls/DevHrmsDropdownInput";
+import CandidateLinkService from "../../services/candidateLinkService";
+import LinkTypeService from "../../services/linkTypeService";
 
-export default function SkillUpdateModal(props) {
+export default function LinkUpdateModal(props) {
+  const [linkTypes, setLinkTypes] = useState([]);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    let linkTypeService = new LinkTypeService();
+    linkTypeService
+      .getLinkTypes()
+      .then((result) => setLinkTypes(result.data.data));
+  }, []);
+
   const schema = Yup.object({
-    id: Yup.number(),
-    skillName: Yup.string().required("Yetenek Bilgisi Zorunludur"),
+    linkPath: Yup.string().required("Link Yolu Bilgisi Zorunludur"),
+    linkTypeId: Yup.number().required(),
   });
 
-  function handleUpdateSkill(values) {
-    let skillService = new SkillService();
-    skillService.update(values);
-    toast.success("Yetenekleriniz Güncellendi.");
-  }
-
-  const skillAddInitialValues = {
+  const linkAddInitialValues = {
     candidateId: props.candidateId,
-    skillName: "",
+    linkPath: "",
+    linkTypeId: 0,
   };
 
-  const skillAddSchema = Yup.object({
-    skillName: Yup.string().required("Yetenek Bilgisi Zorunludur"),
-  });
+  const linkTypeOptions = linkTypes?.map((linkType, index) => ({
+    key: index,
+    text: linkType.linkTypeName,
+    value: linkType.id,
+  }));
 
-  function handleAddSkill(values) {
-    let skillService = new SkillService();
-    skillService.add(values);
-    toast.success("Özgeçmişinize Yeni Bir Yetenek Eklendi.");
+  function handleUpdateLink(values) {
+    let candidateLinkService = new CandidateLinkService();
+    candidateLinkService.update(values);
+    toast.success("Link Bilgileriniz Güncellendi.");
   }
 
-  function handleDeleteSkill(skillId) {
-    let skillService = new SkillService();
-    skillService.delete(skillId);
-    toast.success("Yetenek Silindi.");
+  function handleDeleteLink(linkId) {
+    let candidateLinkService = new CandidateLinkService();
+    candidateLinkService.delete(linkId);
+    toast.success("Link Silindi.");
+  }
+
+  function handleAddLink(values) {
+    let candidateLinkService = new CandidateLinkService();
+    candidateLinkService.add(values);
+    toast.success("Özgeçmişinize Yeni Bir Link Eklendi.");
   }
 
   return (
@@ -51,44 +64,39 @@ export default function SkillUpdateModal(props) {
         onOpen={() => setOpen(true)}
         open={open}
         trigger={
-          <Button fluid style={{ marginTop: "15px", backgroundColor: "white" }}>
-            Yeteneklerinizi Düzenlemek İçin Tıklayın
+          <Button fluid style={{ marginTop: "15px" }} style={{backgroundColor:"#537fb4", color:"#a5a5a5",padding:"0px",marginLeft:"0px"}}>
+            Linklerinizi Düzenlemek İçin Tıklayın
           </Button>
         }
       >
         <Modal.Header>Bilgilerinizi Düzenleyin</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            {props.candidateSkills?.map((skill) => (
-              <div key={skill.id}>
+            {props.candidateLinks?.map((link) => (
+              <div key={link.id}>
                 <Formik
                   initialValues={{
-                    id: skill.id,
-                    skillName: skill.skillName,
+                    candidateId: parseInt(props.candidateId),
+                    linkId: link.id,
+                    linkPath: link.linkPath,
+                    linkTypeId: link.linkType?.id,
                   }}
                   validationSchema={schema}
                   onSubmit={(values) => {
-                    handleUpdateSkill(values);
+                    handleUpdateLink(values);
                   }}
                 >
                   <Form>
-                    <Divider
-                      horizontal
-                      style={{ marginBottom: "20px", marginTop: "10px" }}
-                    >
-                      <div
-                        style={{
-                          paddingTop: "10px",
-                          lineHeight: "0px",
-                          fontSize: "20px",
-                        }}
-                      >
-                        {skill.skillName}
-                      </div>
-                    </Divider>
-                    <div className="my-header">Yetenek Adı</div>
+                    <div className="my-header">Link Tipi</div>
+                    <DevHrmsDropdownInput
+                      options={linkTypeOptions}
+                      placeholder="Bir Link Tipi Seçiniz"
+                      name="linkTypeId"
+                      className="my-input"
+                    />
+                    <div className="my-header">Link Yolu</div>
                     <DevHrmsTextInput
-                      name="skillName"
+                      name="linkPath"
                       type="text"
                       className="my-input"
                     />
@@ -110,7 +118,7 @@ export default function SkillUpdateModal(props) {
                   color="red"
                   fluid
                   onClick={() => {
-                    handleDeleteSkill(skill.id)
+                    handleDeleteLink(link.id);
                   }}
                   style={{ marginBottom: "40px" }}
                 />
@@ -128,20 +136,27 @@ export default function SkillUpdateModal(props) {
                     fontSize: "20px",
                   }}
                 >
-                  Yetenek Ekle
+                  Link Ekle
                 </div>
               </Divider>
               <Formik
-                initialValues={skillAddInitialValues}
-                validationSchema={skillAddSchema}
+                initialValues={linkAddInitialValues}
+                validationSchema={schema}
                 onSubmit={(values) => {
-                  handleAddSkill(values);
+                  handleAddLink(values);
                 }}
               >
                 <Form>
-                  <div className="my-header">Yetenek Adı</div>
+                  <div className="my-header">Link Tipi</div>
+                  <DevHrmsDropdownInput
+                    options={linkTypeOptions}
+                    placeholder="Bir Link Tipi Seçiniz"
+                    name="linkTypeId"
+                    className="my-input"
+                  />
+                  <div className="my-header">Link Yolu</div>
                   <DevHrmsTextInput
-                    name="skillName"
+                    name="linkPath"
                     type="text"
                     className="my-input"
                   />

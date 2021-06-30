@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
 import CandidateService from "../services/candidateService";
 import { Grid } from "semantic-ui-react";
-import RightProfileBar from "../pages/RightProfileBar";
 
 export default function CandidateList() {
   const [candidates, setCandidates] = useState([]);
@@ -58,7 +57,6 @@ export default function CandidateList() {
             </Table>
           </Grid.Column>
           <Grid.Column width={4}>
-            <RightProfileBar></RightProfileBar>
           </Grid.Column>
         </Grid.Row>
       </Grid>

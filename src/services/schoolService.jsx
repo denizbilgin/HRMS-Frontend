@@ -9,4 +9,15 @@ export default class SchoolService{
     update(values){
         return axios.post("http://localhost:8080/api/schools/update",values)
     }
+
+    add(values){
+        values.candidate = {
+            id: values.candidateId
+        }
+        return axios.post("http://localhost:8080/api/schools/add",values)
+    }
+
+    delete(schoolId){
+        return axios.post("http://localhost:8080/api/schools/delete?schoolId="+schoolId)
+    }
 }

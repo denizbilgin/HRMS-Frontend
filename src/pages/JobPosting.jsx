@@ -34,7 +34,7 @@ export default function JobPosting() {
       jobPostingService.getByCityId(cityId).then((result) => setJobPostings(result.data.data));
     } else if(workingTimeId){
       jobPostingService.getByWorkingTimeId(workingTimeId).then((result) => setJobPostings(result.data.data));
-    } else if(pageNo,pageSize){
+    } else if(pageNo, pageSize){
       jobPostingService.getByPage(pageNo,pageSize).then((result) => setJobPostings(result.data.data));
     }else{
       jobPostingService.getActiveJobPostings().then((result) => setJobPostings(result.data.data));
