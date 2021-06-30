@@ -23,7 +23,6 @@ export default function JobPosting() {
     let jobPostingFavouriteService = new JobPostingFavouriteService();
     let jobPostingService = new JobPostingService();
 
-
     if (cityId && positionId) {
       jobPostingService
       .getByCityIdAndPositionId(cityId, positionId)
@@ -37,7 +36,7 @@ export default function JobPosting() {
     } else if(pageNo, pageSize){
       jobPostingService.getByPage(pageNo,pageSize).then((result) => setJobPostings(result.data.data));
     }else{
-      jobPostingService.getActiveJobPostings().then((result) => setJobPostings(result.data.data));
+      jobPostingService.getByPage(1,9).then((result) => setJobPostings(result.data.data));
     }
     jobPostingFavouriteService.getCandidateFavourites(5).then((result) => setCandidateFavourites(result.data.data));
     jobPostingService.getActiveJobPostings().then((result) => setJobPostingsCount(result.data.data));

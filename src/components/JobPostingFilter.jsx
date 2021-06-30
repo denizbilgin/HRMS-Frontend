@@ -52,7 +52,6 @@ export default function JobPostingFilter() {
     { key: 3, text: 20, value: 20 },
     { key: 4, text: 50, value: 50 },
     { key: 5, text: 100, value: 100 },
-    { key: 6, text: 1, value: 1 },
   ];
 
   useEffect(() => {
