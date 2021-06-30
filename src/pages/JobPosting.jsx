@@ -12,6 +12,7 @@ export default function JobPosting() {
   const [jobPostings, setJobPostings] = useState([]);
   const [candidateFavourites, setCandidateFavourites] = useState([]);
   const [jobPostingsCount, setJobPostingsCount] = useState([])
+  const [render, setRender] = useState(false)
 
   let { cityId, positionId, workingTimeId,pageNo,pageSize } = useParams();
 
@@ -40,7 +41,7 @@ export default function JobPosting() {
     }
     jobPostingFavouriteService.getCandidateFavourites(5).then((result) => setCandidateFavourites(result.data.data));
     jobPostingService.getActiveJobPostings().then((result) => setJobPostingsCount(result.data.data));
-  }, []);
+  }, [render]);
 
   function getRandomColor() {
     var letters = "0123456789ABCDEF";
@@ -58,10 +59,17 @@ export default function JobPosting() {
   function handleChangeFavourite(candidateId,jobPostingId) {
     let jobPostingFavouriteService = new JobPostingFavouriteService();
     jobPostingFavouriteService.changeFavourite(candidateId,jobPostingId)
-    window.location.reload(false);
+    handleRender()
+  }
+
+  function handleRender() {
+    if (render === false) {
+      setRender(true)
+    } else {
+      setRender(false)
+    }
   }
  
-  
   function handleFavouriteIcon(jobPostingId) { 
     var bool = false;
     for (let i = 0; i < candidateFavourites.length; i++) {

@@ -8,10 +8,14 @@ import { Route } from "react-router-dom";
 import Home from "../pages/Home"
 import JobPostingDetail from "../pages/JobPostingDetail";
 import CandidateProfile from "../pages/CandidateProfile";
+import SystemUserProfile from "../pages/SystemUserProfile";
+import EmployerProfile from "../pages/EmployerProfile";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
   return (
     <div style={{minHeight:"480px"}}>
+      <ToastContainer position="bottom-right"/>
       <Grid>
         <Grid.Row>
           <Grid.Column width={16}>
@@ -28,6 +32,8 @@ export default function Dashboard() {
             <Route exact path="/jobpostings/getallbypage/pageNo/:pageNo/pageSize/:pageSize" component={JobPosting}/>
             <Route exact path="/jobposting/:id" component={JobPostingDetail}/>
             <Route exact path="/candidateProfile/candidateId/:id" component={CandidateProfile}/>
+            <Route exact path="/systemUserProfile/systemUserId/:id" component={SystemUserProfile}/>
+            <Route exact path="/employerProfile/employerId/:id" component={EmployerProfile}/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

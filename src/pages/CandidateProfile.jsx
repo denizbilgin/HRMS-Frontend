@@ -2,17 +2,21 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState,useEffect } from 'react';
 import CandidateService from '../services/candidateService';
-import { Grid, Image, Icon, List, Divider, Modal, Button, Header, FormField } from 'semantic-ui-react';
+import { Grid, Image, Icon, List, Divider, Modal, Button, Header, Card } from 'semantic-ui-react';
 import { Formik, Form } from 'formik';
 import * as Yup from "yup";
 import DevHrmsTextInput from '../utilities/customFormControls/DevHrmsTextInput';
+import { toast } from 'react-toastify';
+import JobExperienceUpdateModal from '../components/Modals/JobExperienceUpdateModal';
+import SchoolUpdateModal from '../components/Modals/SchoolUpdateModal';
+import SkillUpdateModal from '../components/Modals/SkillUpdateModal';
+import LanguageUpdateModal from '../components/Modals/LanguageUpdateModal';
 
 export default function CandidateProfile() {
 
     const {id} = useParams();
     const [candidateCv, setCandidateCv] = useState({});
     const [open,setOpen] = useState(false);
-    const [file, setFile] = useState(null)
 
     useEffect(() => {
         let candidateService = new CandidateService();
@@ -64,17 +68,13 @@ export default function CandidateProfile() {
     function handlePersonalUpdate(values) {
         let candidateService = new CandidateService();
         candidateService.updateCandidate(values)
+        toast.success("Bilgileriniz Başarıyla Güncellendi " + candidateCv.candidate?.firstName + " " + candidateCv.candidate?.lastName)
     }
 
     function handleUploadImage(image) {
         let candidateService = new CandidateService();
         candidateService.uploadImage(id,image)
     }
-
-    const onChangeFile = e => {
-        setFile(e.target.files[0]);
-        console.log(file)
-    };
 
     return (
         <div>
@@ -104,7 +104,7 @@ export default function CandidateProfile() {
                                             <Icon name="table"/> Doğum Tarihi
                                         </div>
                                         <div>
-                                            <span style={{color:"#d4d4d4"}}>{candidateCv.candidate?.birthYear}</span>
+                                            <span style={{color:"#d4d4d4"}}>{editDate(candidateCv.candidate?.birthYear)}</span>
                                         </div>
                                     </div>
                                     <div>
@@ -132,7 +132,7 @@ export default function CandidateProfile() {
                             </div>
                         </Grid.Column>
                         <Grid.Column width={11} style={{paddingLeft:"0px",height:"100%",padding:"0px"}}>
-                            <div className="cv-right" style={{backgroundColor:"#fff",padding:"30px"}}>
+                            <div className="cv-right" style={{backgroundColor:"#fff",padding:"30px",paddingBottom:"5px"}}>
                                 <div className="job-experiences" style={{marginLeft:"15px"}}>
                                     <div className="cv-right-header">
                                         <Icon name="briefcase"/> <b>İş Deneyimleri</b>
@@ -171,6 +171,7 @@ export default function CandidateProfile() {
                                                 </List.Item>
                                             ))}
                                         </List>
+                                        <JobExperienceUpdateModal candidateJobExperiences={candidateCv.jobExperiences}/>
                                     </div>
                                 </div>
                                 <Divider style={{marginLeft:"0px"}}/>
@@ -204,6 +205,7 @@ export default function CandidateProfile() {
                                                 </Grid>
                                             ))}
                                         </List>
+                                        <SchoolUpdateModal candidateSchools={candidateCv.schools}/>
                                     </div>
                                 </div>
                                 <Divider style={{marginLeft:"0px"}}/>
@@ -224,6 +226,7 @@ export default function CandidateProfile() {
                                                 ))}
                                             </Grid>
                                         </List>
+                                        <SkillUpdateModal candidateSkills={candidateCv.skills}/>
                                     </div>
                                 </div>
                                 <Divider style={{marginLeft:"0px"}}/>
@@ -248,6 +251,7 @@ export default function CandidateProfile() {
                                                     ))}
                                             </Grid>
                                         </List>
+                                        <LanguageUpdateModal candidateLanguages={candidateCv.languages}/>
                                     </div>
                                 </div>
                             </div>
@@ -272,20 +276,13 @@ export default function CandidateProfile() {
                         validationSchema = {personalValidationSchema}
                         onSubmit = {(values) => {
                             handlePersonalUpdate(values);
-
-                            console.log(values)
-                            values.imgUrl= file
-                            handleUploadImage(values.imgUrl)
                         }}
                         >
                             <Form>
                                 <Header>Profil Fotoğrafınızı Güncellemek İçin Bir Dosya Seçin</Header>
-                                <FormField>
-                                    <input type="file" name="imgUrl" accept="image/*" onChange={onChangeFile}/>
-                                </FormField>
                                 <DevHrmsTextInput
-                                name="email"
                                 type="email"
+                                name="email"
                                 className = "my-input"
                                 />
                                 <DevHrmsTextInput

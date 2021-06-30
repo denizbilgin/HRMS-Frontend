@@ -161,6 +161,26 @@ ul{
   font-size: 22px;
 }
 
+/* EMPLOYER PROFILE */
+
+.employer-profile-header{
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.employer-header{
+  font-size: 40px;
+  margin: 30px auto;
+}
+
+.employer-body{
+  font-size: 20px;
+}
+
+.employer-body-section{
+  margin-top: 30px;
+}
+
 /* CANDIDATE PROFILE */
 
 .cv-container{
@@ -223,4 +243,9 @@ ul{
   border: none;
   box-shadow: 2px 2px 10px #dbdbdbcc ;
   
+}
+
+.my-header{
+  font-size: 20px;
+  margin-top: 20px;
 }
