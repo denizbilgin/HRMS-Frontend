@@ -80,55 +80,58 @@ ul{
 
 /* JOBPOSTING DETAIL */
 
-.job-posting-detail-card{
-  margin-top: 10px;
-  padding: 30px;
-  position: relative;
-  height: 380px;
-  border-radius: 5px;
+.job-posting-detail-container{
+  box-shadow: 22px 11px 22px rgb(230, 230, 230);
 }
 
-.job-posting-detail-card-header{
-  font-size: 20px;
-}
-
-.job-posting-detail-card-listingdate{
-  position: absolute;
-  top: 10px;
-  left: 30px;
+.job-posting-detail-header{
+  margin-top: 20px;
+  font-size: 22px;
   color: #c0c0c0;
+  margin-bottom: 10px;
 }
 
-.job-posting-detail-card-city{
-  color: #c0c0c0;
-  position: absolute;
-  right: 45px;
-  top: 60px;
-  border: 1px solid #c0c0c0;
-  padding: 10px;
-  border-radius: 5px;
+.job-posting-detail-text{
+  font-size: 17px;
+  margin-bottom: 20px;
 }
 
-.job-posting-detail-card-body{
-  margin-top: 30px;
-  position: absolute;
+.job-posting-detail-up{
+  background-color: #537fb4;
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+  background-image: url("Images/office.png");
+  background-size: auto;
+}
+
+.job-posting-detail-down{
+  background-color: white;
   text-align: left;
+  padding: 10px;
+  border-radius: 0 0 15px 15px;
+  padding-left: 40px;
+  padding-bottom: 40px;
+  position: relative;
 }
 
-.job-posting-detail-card-salary{
-  margin-top: 15px;
-}
-
-.job-posting-detail-card-employer{
+.job-posting-detail-listing-date{
   position: absolute;
+  color: #c0c0c0;
+  top: 10px;
   right: 40px;
-  bottom: 80px;
+  text-align: center;
 }
 
-.job-posting-detail-card-footer{
-  position: absolute;
-  bottom: -10px;
-  width: 94%;
+.job-posting-detail-big-header{
+  font-size: 40px;
+  margin: 30px auto;
+  color: #222;
+}
+
+.job-posting-img{
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 26px;
 }
 
 
@@ -145,9 +148,6 @@ ul{
   right: -100px;
 }
 
-/* RIGHT PROFILE BAR */
-
-
 /* FOOTER */
 
 .footer{
@@ -162,22 +162,53 @@ ul{
 
 /* EMPLOYER PROFILE */
 
-.employer-profile-header{
-  font-size: 20px;
-  margin-top: 20px;
+.employer-profile-container{
+  box-shadow: 22px 11px 22px rgb(230, 230, 230);
 }
 
-.employer-header{
+.employer-profile-big-header{
   font-size: 40px;
-  margin: 30px auto;
+  margin: 20px auto;
+  color: white;
 }
 
-.employer-body{
-  font-size: 20px;
+.employer-profile-header{
+  margin-top: 20px;
+  font-size: 22px;
+  color: #c0c0c0;
+  margin-bottom: 10px;
 }
 
-.employer-body-section{
-  margin-top: 30px;
+.employer-profile-text{
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+.employer-profile-up{
+  background-color: #537fb4;
+  padding: 10px;
+  border-radius: 15px 15px 0 0 ;
+}
+
+.employer-profile-down{
+  background-color: white;
+  text-align: left;
+  padding: 10px;
+  border-radius: 0 0 15px 15px;
+  padding-left: 40px;
+  padding-bottom: 40px;
+}
+
+.employer-modal-header{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #c0c0c0;
+}
+
+.employer-profile-img{
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 50px;
 }
 
 /* CANDIDATE PROFILE */
@@ -221,6 +252,12 @@ ul{
 .cv-right-grey-text{
   color: #a5a5a5;
   margin-right: 10px;
+}
+
+.candidate-profile-header{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #c0c0c0;
 }
 
 /* MY'S */

@@ -450,31 +450,37 @@ export default function CandidateProfile() {
                 <Header>
                   Profil Fotoğrafınızı Güncellemek İçin Bir Dosya Seçin
                 </Header>
-                <DevHrmsTextInput
-                  type="email"
-                  name="email"
-                  className="my-input"
-                />
+                <div className="candidate-profile-header">Ad</div>
                 <DevHrmsTextInput
                   name="firstName"
                   type="text"
                   className="my-input"
                 />
+                <div className="candidate-profile-header">Soyad</div>
                 <DevHrmsTextInput
                   name="lastName"
                   type="text"
                   className="my-input"
                 />
+                <div className="candidate-profile-header">Mail</div>
+                <DevHrmsTextInput
+                  type="email"
+                  name="email"
+                  className="my-input"
+                />
+                <div className="candidate-profile-header">T.C Kimlik No</div>
                 <DevHrmsTextInput
                   name="nationalityId"
                   type="text"
                   className="my-input"
                 />
+                <div className="candidate-profile-header">Doğum Tarihi</div>
                 <DevHrmsTextInput
                   name="birthYear"
                   type="date"
                   className="my-input"
                 />
+                <div className="candidate-profile-header">Açıklama</div>
                 <DevHrmsTextInput
                   name="description"
                   type="text"

@@ -8,7 +8,7 @@ import {
   Image,
   Modal,
   Header,
-  Icon
+  Icon,
 } from "semantic-ui-react";
 import EmployerService from "../services/employerService";
 import { Formik, Form } from "formik";
@@ -49,7 +49,9 @@ export default function EmployerProfile() {
   function handleUpdate(values) {
     let employerService = new EmployerService();
     employerService.update(values);
-    toast.success("Güncelleme İsteğiniz Gönderildi. Sistem Çalışanı Tarafından Onaylandıktan Sonra Güncellemeniz Tamamlanacaktır.")
+    toast.success(
+      "Güncelleme İsteğiniz Gönderildi. Sistem Çalışanı Tarafından Onaylandıktan Sonra Güncellemeniz Tamamlanacaktır."
+    );
   }
 
   return (
@@ -61,48 +63,45 @@ export default function EmployerProfile() {
           PROFİLİNİZ
         </div>
       </Divider>
-      <div>
-        <div>
-          <Image
-            src={employer.imgUrl}
-            className="cv-profile-img"
-            size="medium"
-          />
-        <div className="employer-header">
+      <div className="employer-profile-container">
+        <div className="employer-profile-up">
+          <div>
+            <Image
+              src={employer.imgUrl}
+              className="employer-profile-img"
+              size="medium"
+            />
+          </div>
+          <div className="employer-profile-big-header">
             <b>{employer.companyName}</b>
+          </div>
         </div>
-        <div className="employer-body">
-            <div className="employer-body-section">
-                <span><Icon name="at" style={{marginRight:"10px"}}/></span>
-                <span>Email</span>
-                <Icon name="triangle right"/>
-                <span>{employer.email}</span>
+        <div className="employer-profile-down">
+          <div>
+            <div className="employer-profile-header">Firma Adı</div>
+            <div className="employer-profile-text">
+              {employer.companyName}
             </div>
-            <div className="employer-body-section">
-                <span><Icon name="building" style={{marginRight:"10px"}}/></span>
-                <span>Şirket Adı</span>
-                <Icon name="triangle right"/>
-                <span>{employer.companyName}</span>
+          </div>
+          <div>
+            <div className="employer-profile-header">Mail</div>
+            <div className="employer-profile-text">
+              {employer.email}
             </div>
-            <div className="employer-body-section">
-                <span><Icon name="compass" style={{marginRight:"10px"}}/></span>
-                <span>Web Adresi</span>
-                <Icon name="triangle right"/>
-                <span>{employer.webAdress}</span>
+          </div>
+          <div>
+            <div className="employer-profile-header">Web Adres</div>
+            <div className="employer-profile-text">
+              {employer.webAdress}
             </div>
-            <div className="employer-body-section">
-                <span><Icon name="phone" style={{marginRight:"10px"}}/></span>
-                <span>Telefon Numarası</span>
-                <Icon name="triangle right"/>
-                <span>{employer.phoneNumber}</span>
+          </div>
+          <div>
+            <div className="employer-profile-header">Telefon</div>
+            <div className="employer-profile-text">
+              {employer.phoneNumber}
+              <Icon name="phone" style={{marginLeft:"7px"}}/>
             </div>
-            <div className="employer-body-section">
-                <span><Icon name="question" style={{marginRight:"10px"}}/></span>
-                <span>Hesabınız Onaylı Mı?</span>
-                <Icon name="triangle right"/>
-                {employer.activated === false ? <Icon name="delete"/> : <Icon name="checkmark"/> }
-            </div>
-        </div>
+          </div>
         </div>
       </div>
       <Modal
@@ -126,10 +125,10 @@ export default function EmployerProfile() {
             src={employer.imgUrl}
             className="cv-profile-img"
             size="medium"
-            style={{margin:"40px"}}
+            style={{ margin: "40px" }}
           />
-          <Modal.Description style={{width:"100%"}}>
-            <Header style={{fontSize:"30px"}}>Bilgileriniz</Header>
+          <Modal.Description style={{ width: "100%" }}>
+            <Header style={{ fontSize: "30px" }}>Bilgileriniz</Header>
             <Formik
               initialValues={initialValues}
               validationSchema={schema}
@@ -138,25 +137,25 @@ export default function EmployerProfile() {
               }}
             >
               <Form>
-                <div className="employer-profile-header">Email :</div>
-                <DevHrmsTextInput
-                  name="email"
-                  type="email"
-                  className="my-input"
-                />
-                <div className="employer-profile-header">Şirket İsmi :</div>
+                <div className="employer-modal-header">Şirket İsmi :</div>
                 <DevHrmsTextInput
                   name="companyName"
                   type="text"
                   className="my-input"
                 />
-                <div className="employer-profile-header">Web Adresi :</div>
+                <div className="employer-modal-header">Email :</div>
+                <DevHrmsTextInput
+                  name="email"
+                  type="email"
+                  className="my-input"
+                />
+                <div className="employer-modal-header">Web Adresi :</div>
                 <DevHrmsTextInput
                   name="webAdress"
                   type="text"
                   className="my-input"
                 />
-                <div className="employer-profile-header">
+                <div className="employer-modal-header">
                   Telefon Numarası :
                 </div>
                 <DevHrmsTextInput
@@ -184,9 +183,9 @@ export default function EmployerProfile() {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
-            <Button color='red' onClick={() => setOpen(false)}>
-                Kapat
-            </Button>
+          <Button color="red" onClick={() => setOpen(false)}>
+            Kapat
+          </Button>
         </Modal.Actions>
       </Modal>
     </div>

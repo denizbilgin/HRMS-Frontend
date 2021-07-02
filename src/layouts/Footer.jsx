@@ -7,11 +7,11 @@ export default function Footer() {
       <div style={{ backgroundColor: "#e3e3e3", padding:"10px" }}>
         <Container>
           <List horizontal>
-            <List.Item><Icon name="facebook" size="big" style={{color:"grey"}}/></List.Item>
-            <List.Item><Icon name="twitter" size="big" style={{color:"grey"}}/></List.Item>
-            <List.Item><Icon name="instagram" size="big" style={{color:"grey"}}/></List.Item>
-            <List.Item><Icon name="linkedin" size="big" style={{color:"grey"}}/></List.Item>
-            <List.Item><Icon name="github" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item href=""><Icon name="facebook" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item href="https://twitter.com/denizb04"><Icon name="twitter" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item href="https://www.instagram.com/denizb04"><Icon name="instagram" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item href="https://www.linkedin.com/in/deniz-bilgin-763177207"><Icon name="linkedin" size="big" style={{color:"grey"}}/></List.Item>
+            <List.Item href="https://github.com/denizbilgin"><Icon name="github" size="big" style={{color:"grey"}}/></List.Item>
           </List>
         </Container>
       </div>

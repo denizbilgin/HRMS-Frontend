@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import JobPostingService from "../services/jobPostingService";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Icon, Grid, Button, Divider } from "semantic-ui-react";
+import { Icon, Grid, Button, Divider, Image, List } from "semantic-ui-react";
 
 export default function JobPostingDetail() {
   let { id } = useParams();
@@ -17,164 +17,176 @@ export default function JobPostingDetail() {
       .then((result) => setJobPosting(result.data.data));
   }, []);
 
+  function editDate(strDate) {
+    var strSplitDate = String(strDate).split(" ");
+    var date = new Date(strSplitDate[0]);
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1; //January is 0!
+
+    var yyyy = date.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    date = dd + "/" + mm + "/" + yyyy;
+    return date.toString();
+  }
+
   return (
     <div>
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={1}>
-            <Button
-            primary
-            content="Geri"
-            as={NavLink}
-            to={"/jobpostings"}
-            />
-          </Grid.Column>
-          <Grid.Column width={15}>
-            <Divider style={{marginLeft:"10px"}}></Divider>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-
-      <div className="job-posting-detail-card">
-        <div className="job-posting-detail-card-header" style={{fontSize:"30px"}}>
-          <b>{jobPosting.employer?.companyName}</b>
+      <Divider horizontal style={{ marginBottom: "40px" }}>
+        <div
+          style={{ paddingTop: "10px", lineHeight: "0px", fontSize: "20px" }}
+        >
+          İLAN DETAYI
         </div>
-        <div className="job-posting-detail-card-city">
-          <Icon name="map marker alternate" />
-          {jobPosting.city?.cityName}
-        </div>
-        <div className="job-posting-detail-card-listingdate">
-          <Icon name="clock"/>
-          {jobPosting.listingDate}
-        </div>
-        <div className="job-posting-detail-card-body">
-          <div>
-            <span>
-              <b>Pozisyon</b>
-            </span>{" "}
-            <Icon name="caret right" style={{ marginLeft: "2px" }} />
-            {jobPosting.jobPosition?.positionName}
+      </Divider>
+      <div className="job-posting-detail-container">
+        <div className="job-posting-detail-up">
+          <Image
+            src={jobPosting.employer?.imgUrl}
+            className="job-posting-img"
+            style={{width:"90px"}}
+          />
+          <div className="job-posting-detail-big-header">
+            <b>{jobPosting.employer?.companyName}</b>
           </div>
-          <br />
-          <div>
-            <span>
-              <b>İş Detayı</b>
-            </span>{" "}
-            <Icon name="caret right" />
-            {jobPosting?.jobDescription}
+        </div>
+        <div className="job-posting-detail-down">
+          <div className="job-posting-detail-listing-date">
+            <Icon name="clock outline" />
+            {editDate(jobPosting.listingDate)}
           </div>
-          <Grid style={{ width: "150%", marginTop: "10px" }} columns={3}>
-            <Grid.Row>
+          <Grid >
+            <Grid.Row columns={2}>
               <Grid.Column>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #c0c0c0",
-                      paddingBottom: "10px",
-                    }}
-                  >
-                    <b>İş Türü</b>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Aranan Pozisyon
                   </div>
-                  <div style={{ marginTop: "10px" }}>
-                    <Icon name="check square outline" />
+                  <div className="job-posting-detail-text">
+                    {jobPosting.jobPosition?.positionName}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">Açıklama</div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.jobDescription}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">Maaş Aralığı</div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.minSalary} - {jobPosting.maxSalary}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Çalışma Zamanı
+                  </div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.workingTime?.workingTimeName}
+                  </div>
+                </div>
+              </Grid.Column>
+              <Grid.Column>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Aranan Kişi Sayısı
+                  </div>
+                  <div>
+                    <List horizontal>
+                      {jobPosting.numberOfOpenPosition - 1 !== 0 && (
+                        <List.Item>
+                          <Icon name="square outline" />
+                          {jobPosting.numberOfOpenPosition - 1}
+                        </List.Item>
+                      )}
+                      <List.Item>
+                        <Icon name="check square outline" />
+                        {jobPosting.numberOfOpenPosition}
+                      </List.Item>
+                      <List.Item>
+                        <Icon name="square outline" />
+                        {jobPosting.numberOfOpenPosition + 1}
+                      </List.Item>
+                    </List>
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">Şehir</div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.city?.cityName}
+                    <Icon name="map marker alternate" style={{marginLeft:"5px"}}/>
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">İş Tipi</div>
+                  <div className="job-posting-detail-text">
                     {jobPosting.jobType?.jobTypeName}
                   </div>
                 </div>
-              </Grid.Column>
-              <Grid.Column>
-                <div style={{ textAlign: "center" }}>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #c0c0c0",
-                      paddingBottom: "10px",
-                    }}
-                  >
-                    <b>Aranan Kişi Sayısı</b>
+                <div>
+                  <div className="job-posting-detail-header">
+                    İlanın Bitiş Tarihi
                   </div>
-                  <div style={{ marginTop: "10px" }}>
-                    <div>
-                      {jobPosting.numberOfOpenPosition - 1 !== 0 && (
-                        <div>
-                          <Icon name="square outline" />
-                          {jobPosting.numberOfOpenPosition - 1}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <Icon name="check square outline" />
-                      {jobPosting.numberOfOpenPosition}
-                    </div>
-                    <div>
-                      <Icon name="square outline" />
-                      {jobPosting.numberOfOpenPosition + 1}
-                    </div>
+                  <div className="job-posting-detail-text">
+                    {editDate(jobPosting.deadlineDate)}
                   </div>
                 </div>
               </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={1}>
               <Grid.Column>
-                <div style={{ textAlign: "center" }}>
+                <Divider horizontal style={{ marginBottom: "40px",marginRight:"40px" }}>
                   <div
                     style={{
-                      borderBottom: "1px solid #c0c0c0",
-                      paddingBottom: "10px",
+                      paddingTop: "10px",
+                      lineHeight: "0px",
+                      fontSize: "20px",
                     }}
                   >
-                    <b>Çalışma Süresi</b>
+                    İş Veren Bilgileri
                   </div>
-                  <div style={{ marginTop: "10px" }}>
-                    <Icon name="check square outline" />
-                    {jobPosting.workingTime?.workingTimeName}
+                </Divider>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Firma Adı
+                  </div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.employer?.companyName}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Mail
+                  </div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.employer?.email}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Web Adresi
+                  </div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.employer?.webAdress}
+                  </div>
+                </div>
+                <div>
+                  <div className="job-posting-detail-header">
+                    Telefon
+                  </div>
+                  <div className="job-posting-detail-text">
+                    {jobPosting.employer?.phoneNumber}
+                    <Icon name="phone" style={{marginLeft:"7px"}}/>
                   </div>
                 </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
-          <div className="job-posting-detail-card-salary">
-            <span>
-              <b>Maaş Skalası</b>
-            </span>{" "}
-            <Icon name="caret right" /> {jobPosting.minSalary}{" "}
-            <Icon name="minus" /> {jobPosting.maxSalary}
-          </div>
-          <br />
-          <div style={{ marginTop: "10px" }}>
-            <span>
-              <b>İlanın Son Erişim Tarihi</b>
-            </span>{" "}
-            <Icon name="caret right" /> {jobPosting.deadlineDate}
-          </div>
-        </div>
-        <div
-          className="job-posting-detail-card-employer"
-          style={{ textAlign: "center" }}
-        >
-          <div
-            style={{ borderBottom: "1px solid #c0c0c0", paddingBottom: "10px" }}
-          >
-            İşveren Bilgileri
-          </div>
-          <div>
-            <div style={{ marginTop: "10px" }}>
-              <Icon name="phone" />
-              {jobPosting.employer?.phoneNumber}
-            </div>
-            <div>
-              <Icon name="chrome" />
-              {jobPosting.employer?.webAdress}
-            </div>
-          </div>
-        </div>
-        <div
-          className="job-posting-detail-card-footer"
-          style={{ textAlign: "center" }}
-        >
-          <Button
-            fluid
-            primary
-            content="İşverenle İletişime Geç"
-            icon="phone"
-            labelPosition="right"
-          ></Button>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function LinkUpdateModal(props) {
   }, []);
 
   const schema = Yup.object({
-    linkPath: Yup.string().required("Link Yolu Bilgisi Zorunludur"),
+    linkPath: Yup.string().url().required("Link Yolu Bilgisi Zorunludur"),
     linkTypeId: Yup.number().required(),
   });
 
